@@ -1,0 +1,40 @@
+identity:
+  type: UserAssigned
+  userAssignedIdentities:
+    /subscriptions/614fa76d-a87d-4650-bfc9-51272298fb73/resourceGroups/staging-rg-trading/providers/Microsoft.ManagedIdentity/userAssignedIdentities/staging-id-trading: {}
+tags:
+  env: staging
+properties:
+  configuration:
+    activeRevisionsMode: Single
+    ingress:
+      allowInsecure: false
+      clientCertificateMode: null
+      corsPolicy: null
+      customDomains: null
+      exposedPort: 0
+      external: true
+      ipSecurityRestrictions: null
+      stickySessions: null
+      targetPort: 8080
+      traffic:
+      - latestRevision: true
+        weight: 100
+      transport: Auto
+  template:
+    containers:
+    - image: acrab.azurecr.io/template-api:latest
+      name: app
+      resources:
+        cpu: 0.25
+        ephemeralStorage: 1Gi
+        memory: 0.5Gi
+      env:
+      - name: DOTNET_ENVIRONMENT
+        value: staging
+      - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+        value: _APPLICATIONINSIGHTS_CONNECTION_STRING_
+    scale:
+      maxReplicas: 1
+      minReplicas: 0
+      rules: null
