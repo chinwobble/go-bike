@@ -1,4 +1,4 @@
-# dotnet templates with dapr integration
+# go templates with dapr integration
 
 This folder contains a boilerplate for dotnet and dapr hosted on azure container apps.
 

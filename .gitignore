@@ -461,3 +461,4 @@ FodyWeavers.xsd
 .DS_Store
 
 build
+apps/bikeexchange_cache
