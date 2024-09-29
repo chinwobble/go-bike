@@ -1,0 +1,37 @@
+package components
+
+import "github.com/chinwobble/web-scraper/data"
+
+templ productsTable(title string, products []data.Product) {
+	<h1>{ title }</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Current Price</th>
+				<th scope="col">Original Price</th>
+				<th scope="col">Source</th>
+				<th scope="col">Sku</th>
+				<th scope="col">Brand</th>
+				<th scope="col">Model</th>
+				<th scope="col">Options</th>
+			</tr>
+		</thead>
+		for _, item := range products {
+            <tr>
+			<td>{ item.Id }</td>
+			<td>{ item.CurrentPrice }</td>
+			<td>{ item.OriginalPrice }</td>
+			<td>{ item.Source }</td>
+			<td>{ item.Sku }</td>
+			<td>{ item.Brand }</td>
+			<td>{ item.Model }</td>
+			<td>{ item.Options }</td>
+            </tr>
+		}
+	</table>
+}
+
+templ ProductsPage(title string, products []data.Product) {
+	@Layout(productsTable(title, products))
+}

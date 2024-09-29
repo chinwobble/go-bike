@@ -1,0 +1,12 @@
+services:
+  postgres:
+    container_name: 'postgres'
+    image: postgres:15
+    volumes:
+      - ./pg_data/data15:/var/lib/postgresql/data/
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: 'trust'
+      POSTGRES_DB: go-bike
+      LOCAL_USER:

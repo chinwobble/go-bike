@@ -103,7 +103,7 @@ type ProductPageSceneProps struct {
 
 func Scrape(url string, category string) []ScrapeResult {
 	c := colly.NewCollector(
-		colly.AllowedDomains("www.bikeexchange.com.au", "bikeexchange.com.au"),
+		colly.AllowedDomains("www.shop.bikeexchange.com.au", "bikeexchange.com.au"),
 		colly.CacheDir("./bikeexchange_cache"),
 	)
 

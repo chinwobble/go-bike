@@ -22,43 +22,36 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2021-06-01' = {
   }
 }
 
+// module platform '../modules/managedEnv/main.bicep' = {
+//   name: 'managedEnv-module'
+//   params: {
+//     environment: environment
+//     location: location
+//     logAnalyticsCustomerId: logAnalytics.properties.customerId
+//     logAnalyticsprimarySharedKey: logAnalytics.listKeys().primarySharedKey
+//     suffix: 'ab'
+//   }
+// }
 
-resource managedEnv 'Microsoft.App/managedEnvironments@2023-05-01' = {
-  name: '${environment}-me'
-  location: location
-  tags: {
-    env: environment
-  }
-  // kind: 'consumption'
-  properties: {
-    appLogsConfiguration: {
-      destination: 'log-analytics'
-      logAnalyticsConfiguration: {
-        customerId: logAnalytics.properties.customerId
-        sharedKey: logAnalytics.listKeys().primarySharedKey
-      }
-    }
-    peerAuthentication: {
-      mtls: {
-        enabled: true
-      }
-    }
-    // vnetConfiguration: {
-    //   dockerBridgeCidr: 'string'
-    //   infrastructureSubnetId: 'string'
-    //   internal: bool
-    //   platformReservedCidr: 'string'
-    //   platformReservedDnsIP: 'string'
-    // }
-    workloadProfiles: [
-      {
-        name: 'Consumption'
-        workloadProfileType: 'Consumption'
-      }
-    ]
-    zoneRedundant: false
+module platform '../modules/aks/main.bicep' = {
+  name: 'aks-module'
+  params: {
+    clusterName: '${environment}-aks'
+    nodeResourceGroup: '${environment}-rg-aks-managed'
+    environment: environment
+    dnsPrefix: 'staging-aks'
+    location: location
+    kubernetesVersion: '1.28'
+    agentMinCount: 1
+    agentCount: 1
+    agentMaxCount: 1
+    // logAnalyticsCustomerId: logAnalytics.properties.customerId
+    // logAnalyticsprimarySharedKey: logAnalytics.listKeys().primarySharedKey
+    // suffix: 'ab'
   }
 }
+
+
 
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   name: '${environment}-ai'

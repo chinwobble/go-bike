@@ -1,0 +1,15 @@
+package components
+
+import "github.com/chinwobble/web-scraper/data"
+
+templ scrapesTable(title string, scrapes []data.Scrape) {
+	<h1>{ title } </h1>
+	<table class="table">
+		<thead></thead>
+		<tbody></tbody>
+	</table>
+}
+
+templ ScrapesPage(title string, scrapes []data.Scrape) {
+	@Layout(scrapesTable(title, scrapes))
+}

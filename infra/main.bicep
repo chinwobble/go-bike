@@ -27,21 +27,21 @@ module platform 'platform/main.bicep' = {
 }
 
 
-resource tradingAppRg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: '${environment}-rg-trading'
-  location: location
-  tags: {
-    env: environment
-  }
-}
+// resource tradingAppRg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+//   name: '${environment}-rg-trading'
+//   location: location
+//   tags: {
+//     env: environment
+//   }
+// }
 
 
-module tradingApp 'apps/trading/main.bicep' = {
-  name: 'trading-app-module'
-  scope: tradingAppRg
-  params: {
-    environment: environment
-    location: location
-    suffix: 'trading'
-  }
-}
+// module tradingApp 'apps/trading/main.bicep' = {
+//   name: 'trading-app-module'
+//   scope: tradingAppRg
+//   params: {
+//     environment: environment
+//     location: location
+//     suffix: 'trading'
+//   }
+// }
